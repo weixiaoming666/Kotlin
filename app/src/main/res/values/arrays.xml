@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="title">
+        <item>1.\t\t\t\t\t\tKotlin基本入门安装</item>
+        <item>2.\t\t\t\t\t\tKotlin基本语法</item>
+        <item>3.\t\t\t\t\t\tKotlin属性和字段</item>
+        <item>4.\t\t\t\t\t\tKotlin 基本类型</item>
+        <item>5.\t\t\t\t\t\tKotlin 惯用语法和代码风格</item>
+        <item>6.\t\t\t\t\t\tKotlin 包，控制流，返回与跳转</item>
+        <item>7.\t\t\t\t\t\tKotlin 类的继承接口和实现</item>
+        <item>8.\t\t\t\t\t\tKotlin 对象表达式和声明</item>
+        <item>9.\t\t\t\t\t\tKotlin 扩展和this表达式</item>
+        </array>
+</resources>

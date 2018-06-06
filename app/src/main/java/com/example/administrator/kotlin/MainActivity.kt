@@ -3,15 +3,41 @@ package com.example.administrator.kotlin
 * 与Java定义包名一样，在源文件的开头定义包名：
 * 包名和文件夹路径可以不一致：源文件可以放在项目的任意位置。
 * */
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.ListViewCompat
+import android.view.View
+import com.example.administrator.kotlin.activity.KotlinDemo1
+import com.example.administrator.kotlin.utils.ToastUtill
+import com.example.administrator.kotlin.utils.Utill
+
+
 //学习第一步 Settings->Plugins->Browse Repositories->搜索kotlin  安卓ojbk 自动同步和选择版本 ojbk
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //沉浸式
+//        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN//隐藏状态栏
+//        supportActionBar!!.hide();//隐藏actionbar
+        setListenter()
     }
+
+    private fun setListenter(){
+        var listView: ListViewCompat = findViewById(R.id.lv) as ListViewCompat ;
+        listView.setOnItemClickListener { adapterView, view, i, l ->
+
+            when(i){
+                1-> startActivity(Intent(this@MainActivity, KotlinDemo1::class.java))
+                2-> Utill.jump2NewAty(this@MainActivity,KotlinDemo1::class.java)
+            }
+            ToastUtill.showToast(this, i.toString())
+        }
+    }
+
 
     //    定义函数(Defining functions)与Java定义函数的区别在于：
 // Kotlin在定义函数的时候要加个fun关键词，函数的返回值前后不同，Java的在前面，RU:
@@ -122,5 +148,75 @@ fun main(args: Array<String>) {
     while (i < args.size) {
         print(args[i++])
     }
+
+
 }
+    fun cases(obj: Any) {
+//        when表达式就相当于Java的switch表达式，省去了case和break，并且支持各种类型。
+        when (obj) {
+            1 -> print("One") //如果obj的值为1
+            "Hello" -> print("Greeting") // 如果obj的值为hello
+            is Long -> print("Long") // 如果obj的类型是Long类型
+            !is String -> print("Not a string") // 如果obj的类型不属于String类型
+            else -> print("Unknown") // 默认，相当于switch的default
+        }
+
+
+//        使用in运算符检查数字是否在范围内
+        val x = 0
+        val y = 5
+        if (x in 1..y - 1) { //1..y-1表示1到y-1的范围
+            print("OK")
+        }
+        for (i in 1..100) {
+        }  //  1到100范围
+        for (i in 1 until 100) {
+        } // 半开范围，不包括100，相当于[1,100)
+        for (x in 2..10 step 2) {
+        } // 每次夸2，内容为2,4,6,8,10
+        for (x in 10 downTo 1) {
+        } // 返序
+        if (x in 1..10) {
+        }
+//        if (x !in 0..array.lastIndex) {
+//            print("Out")
+//        }
+
+//        循环输出一个集合里面的值或者判断集合里面是否包含某个变量
+        // 将会调用nemes.contains(name)方法
+        val names:Array<Int> = emptyArray()
+        names[0] = 1
+        for (name in names) {
+            println(name)
+        }
+
+    }
+
+
+    protected fun setImmerseLayout(view: View) {// view为标题栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val decorView = window.decorView
+            val option = View.SYSTEM_UI_FLAG_FULLSCREEN
+            decorView.systemUiVisibility = option
+            val actionBar = supportActionBar
+            actionBar!!.hide()
+
+        }
+    }
+
+    // 沉浸式体验 本质上只是对decorView 的  UI flag 修改
+//    https://blog.csdn.net/guolin_blog/article/details/51763825   学习链接
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus && Build.VERSION.SDK_INT >= 19) {
+            val decorView = window.decorView
+            decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+        }
+    }
+
 }
